@@ -17,6 +17,8 @@ Projeto desenvolvido por alunos da Universidade de Brasília(UnB) para a discipl
 O projeto consiste em encontrar 20 pares de municípios mais próximos para serem agrupados. Com a ideia da possibilidade de reduzir custo entre transações dos mesmos. 
 Será utilizado o algoritmo de par de pontos, que encontra os dois pontos em um conjunto que possuem a menor distância entre si.  
 
+Para extrair a localização de cada município do Brasil, acessamos a base de dados do IBGE disponível em [IBGE](https://www.ibge.gov.br/geociencias/organizacao-do-territorio/malhas-territoriais/15774-malhas.html). O ideal era que viesse um .csv com os nomes e as coordenadas, mas ela vem em um arquivo .zip que extraímos e inserimos os arquivos no site [mapshaper](mapshaper.org). Daí pelo console do site rodamos o comando `-each "LATITUDE=this.y, LONGITUDE=this.x", depois na opção Export selecionamos CSV. Assim, conseguimos um arquivo .csv com os nomes e as coordenadas de cada município do Brasil de uma fonte confiável. O arquivo está no repositório, com nome BR_Municipios_2025.csv.
+
 ## Link do Vídeo da Apresentação
 
 ## Screenshots
