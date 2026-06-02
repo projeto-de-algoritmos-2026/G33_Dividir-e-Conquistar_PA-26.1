@@ -132,8 +132,9 @@ int main() {
         auto [i, j] = closest_pair(points);
         if (i > j) swap(i, j);
         cout << "\033[35m" << names[i] << "\033[m e \033[36m" << names[j] << "\033[m\n";
-        cout << "Cerca de " << sqrt(dist(points[i], points[j])) << " km de distância\n\n";
+        cout << "Cerca de " << sqrt(dist(points[i], points[j])) << " km de distância\n";
         print_map_link(cartesian_to_spheric(points[i]), cartesian_to_spheric(points[j]));
+        cout << '\n';
         names.emplace_back(names[i] + " - " + names[j]); 
         double pt1 = (points[i].first + points[j].first) / 2;
         double pt2 = (points[i].second + points[j].second) / 2; 
