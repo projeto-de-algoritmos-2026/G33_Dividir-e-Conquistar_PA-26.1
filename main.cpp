@@ -42,8 +42,8 @@ pair<double, double> cartesian_to_spheric(pair<double, double> p) {
     return {lat, lon};
 }
 
-double dist(pair<double, double> A, pair<double, double> B) {
-    return (A.first - B.first) * (A.first - B.first) + (A.second - B.second) * (A.second - B.second);
+double dist(pair<double, double> p, pair<double, double> q) {
+    return (p.first - q.first) * (p.first - q.first) + (p.second - q.second) * (p.second - q.second);
 }
 
 pair<int, int> closest_pair(const vector<pair<double, double>>& points) {
@@ -109,8 +109,7 @@ pair<int, int> closest_pair(const vector<pair<double, double>>& points) {
 void print_map_link(pair<double, double> p, pair<double, double> q) {
     auto [lat1, lon1] = p;
     auto [lat2, lon2] = q;
-    // O formato exige a ordem [longitude, latitude]
-    cout << "Link do mapa (com linha reta e distancia):\n"
+    cout << "Link do mapa (com linha reta e distância):\n"
          << "\033[34mhttps://pt.distance.to/" 
          << lat1 << "," << lon1 << "/" 
          << lat2 << "," << lon2 << "\033[m\n";
@@ -133,7 +132,7 @@ int main() {
         auto [i, j] = closest_pair(points);
         if (i > j) swap(i, j);
         cout << "\033[35m" << names[i] << "\033[m e \033[36m" << names[j] << "\033[m\n";
-        cout << "Cerca de " << sqrt(dist(points[i], points[j])) << " km de distância\n";
+        cout << "Cerca de \033[33m" << sqrt(dist(points[i], points[j])) << "\033[m km de distância\n";
         print_map_link(cartesian_to_spheric(points[i]), cartesian_to_spheric(points[j]));
         cout << '\n';
         names.emplace_back(names[i] + " - " + names[j]); 
