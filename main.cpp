@@ -100,8 +100,19 @@ int main() {
     }
 
     points = spheric_to_cartesian(points);
-
-    auto [i, j] = closest_pair(points);
-    cout << names[i] << ' ' << names[j] << '\n';
-    cout << "Cerca de " << sqrt(dist(points[i], points[j])) << "km de distância\n";
-}
+    
+    for (int k= 0; k < 20; ++k) {
+        auto [i, j] = closest_pair(points);
+        if (i > j) swap(i, j);
+        cout << names[i] << ' ' << names[j] << '\n';
+        cout << "Cerca de " << dist(points[i], points[j]) << "km de distância\n\n";
+        names.emplace_back(names[i]+" - "+names[j]); 
+        int pt1 = (points[i].first+points[j].first)/2;
+        int pt2 = (points[i].second+points[j].second)/2; 
+        points.emplace_back(pt1, pt2); 
+        points.erase(points.begin() + j);
+        points.erase(points.begin() + i);
+        names.erase(names.begin() + j);
+        names.erase(names.begin() + i);
+    }
+ }
