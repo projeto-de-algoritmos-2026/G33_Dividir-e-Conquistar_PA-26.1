@@ -110,9 +110,10 @@ void print_map_link(pair<double, double> p, pair<double, double> q) {
     auto [lat1, lon1] = p;
     auto [lat2, lon2] = q;
     // O formato exige a ordem [longitude, latitude]
-    cout << "Link do mapa: "
-         << "\033[34mhttps://geojson.io/#data=data:application/json,%7B%22type%22:%22LineString%22,%22coordinates%22:[["
-         << lon1 << "," << lat1 << "],[" << lon2 << "," << lat2 << "]]%7D\033[m\n";
+    cout << "Link do mapa (com linha reta e distancia):\n"
+         << "\033[34mhttps://pt.distance.to/" 
+         << lat1 << "," << lon1 << "/" 
+         << lat2 << "," << lon2 << "\033[m\n";
 }
 
 int main() {
