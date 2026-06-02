@@ -53,7 +53,13 @@ Porém, ao pesquisar isso vimos que, no algoritmo de par de pontos mais próximo
 
 ## Screenshots
 
+### Execução do programa
 
+<img width="850" height="650" alt="Execução do programa" src="https://github.com/user-attachments/assets/9d50fb02-40c4-438d-a8e6-dcf8c1782a8b" />
+
+### Imagem do Mapa do 2º par de cidades mais próximo
+
+<img width="850" alt="Imagem do Mapa do 2º par de cidades mais próximo" src="https://github.com/user-attachments/assets/5ce757ca-234d-4847-ab12-33112380a99b" />
 
 ## Instalação 
 *Linguagem*: C++<br>
