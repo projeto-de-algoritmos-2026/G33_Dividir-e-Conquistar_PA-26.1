@@ -4,7 +4,6 @@
 #include <utility>
 #include <fstream>
 #include <string>
-#include <iostream>
 
 std::vector<std::pair<std::string, std::pair<double, double>>> csv_parser() {
     std::string file_name = "BR_Municipios_2025.csv";

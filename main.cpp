@@ -5,6 +5,27 @@ using namespace std;
 
 double to_radians(double degree) { return degree * M_PI / 180.0; }
 
+vector<pair<double, double>> spheric_to_cartesian(const vector<pair<double, double>>& points) {
+    double mean_lat = 0;
+    for (auto [lat, lon] : points) mean_lat += lat;
+    mean_lat = to_radians(mean_lat / points.size());
+
+    const double R = 6371.0;
+    vector<pair<double, double>> cartesian_points;
+
+    for (auto [lat, lon] : points) {
+        double lat_rad = to_radians(lat);
+        double lon_rad = to_radians(lon);
+
+        double x = R * lon_rad * cos(mean_lat);
+        double y = R * lat_rad;
+
+        cartesian_points.emplace_back(x, y);
+    }
+
+    return cartesian_points;
+}
+
 double dist(pair<double, double> A, pair<double, double> B) {
     return (A.first - B.first) * (A.first - B.first) + (A.second - B.second) * (A.second - B.second);
 }
@@ -69,31 +90,12 @@ pair<int, int> closest_pair(const vector<pair<double, double>>& points) {
     return ans;
 }
 
-vector<pair<double, double>> spheric_to_cartesian(const vector<pair<double, double>>& points) {
-    double mean_lat = 0;
-    for (auto [lat, lon] : points) mean_lat += lat;
-    mean_lat = to_radians(mean_lat / points.size());
-
-    const double R = 6371.0;
-    vector<pair<double, double>> cartesian_points;
-
-    for (auto [lat, lon] : points) {
-        double lat_rad = to_radians(lat);
-        double lon_rad = to_radians(lon);
-
-        double x = R * lon_rad * cos(mean_lat);
-        double y = R * lat_rad;
-
-        cartesian_points.emplace_back(x, y);
-    }
-
-    return cartesian_points;
-}
-
 int main() {
     vector<pair<string, pair<double, double>>> cities = csv_parser();
+    
     vector<string> names;
     vector<pair<double, double>> points;
+    
     for (const auto& [name, point] : cities) {
         names.emplace_back(name);
         points.emplace_back(point);
