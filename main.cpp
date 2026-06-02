@@ -5,8 +5,9 @@ using namespace std;
 
 double to_radians(double degree) { return degree * M_PI / 180.0; }
 
+double mean_lat = 0;
+
 vector<pair<double, double>> spheric_to_cartesian(const vector<pair<double, double>>& points) {
-    double mean_lat = 0;
     for (auto [lat, lon] : points) mean_lat += lat;
     mean_lat = to_radians(mean_lat / points.size());
 
@@ -24,6 +25,21 @@ vector<pair<double, double>> spheric_to_cartesian(const vector<pair<double, doub
     }
 
     return cartesian_points;
+}
+
+
+pair<double, double> cartesian_to_spheric(pair<double, double> p) {
+    const double R = 6371.0;
+    double x = p.first;
+    double y = p.second;
+    
+    double lat_rad = y / R;
+    double lon_rad = x / (R * cos(mean_lat));
+    
+    double lat = lat_rad * 180.0 / M_PI;
+    double lon = lon_rad * 180.0 / M_PI;
+    
+    return {lat, lon};
 }
 
 double dist(pair<double, double> A, pair<double, double> B) {
@@ -90,6 +106,15 @@ pair<int, int> closest_pair(const vector<pair<double, double>>& points) {
     return ans;
 }
 
+void print_map_link(pair<double, double> p, pair<double, double> q) {
+    auto [lat1, lon1] = p;
+    auto [lat2, lon2] = q;
+    // O formato exige a ordem [longitude, latitude]
+    cout << "Link do mapa: "
+         << "\033[34mhttps://geojson.io/#data=data:application/json,%7B%22type%22:%22LineString%22,%22coordinates%22:[["
+         << lon1 << "," << lat1 << "],[" << lon2 << "," << lat2 << "]]%7D\033[m\n";
+}
+
 int main() {
     vector<pair<string, pair<double, double>>> cities = csv_parser();
     
@@ -106,8 +131,9 @@ int main() {
     for (int k = 0; k < 20; ++k) {
         auto [i, j] = closest_pair(points);
         if (i > j) swap(i, j);
-        cout << names[i] << ' ' << names[j] << '\n';
+        cout << "\033[35m" << names[i] << "\033[m e \033[36m" << names[j] << "\033[m\n";
         cout << "Cerca de " << sqrt(dist(points[i], points[j])) << " km de distância\n\n";
+        print_map_link(cartesian_to_spheric(points[i]), cartesian_to_spheric(points[j]));
         names.emplace_back(names[i] + " - " + names[j]); 
         double pt1 = (points[i].first + points[j].first) / 2;
         double pt2 = (points[i].second + points[j].second) / 2; 

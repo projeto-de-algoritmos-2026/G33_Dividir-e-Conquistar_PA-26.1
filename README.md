@@ -1,6 +1,6 @@
 # G33_Dividir-e-Conquistar_PA-26.1
 
-# Cubando
+# UniCidade
 
 *Conteúdo da Disciplina*: Dividir e Conquistar<br>
 
@@ -20,7 +20,9 @@ O projeto consiste em encontrar 20 pares de municípios mais próximos com a ide
 
 Será utilizado o algoritmo de par de pontos mais próximos, que encontra os dois pontos em um conjunto que possuem a menor distância entre si.  
 
-Para extrair a localização de cada município do Brasil, acessamos a base de dados do IBGE disponível em [IBGE](https://www.ibge.gov.br/geociencias/organizacao-do-territorio/malhas-territoriais/15774-malhas.html). O ideal era que viesse um .csv com os nomes e as coordenadas, mas ela vem em um arquivo .zip que extraímos e inserimos os arquivos no site [mapshaper](mapshaper.org). Daí pelo console do site rodamos o comando `-each "LATITUDE=this.y, LONGITUDE=this.x", depois na opção Export selecionamos CSV. Assim, conseguimos um arquivo .csv com os nomes e as coordenadas de cada município do Brasil de uma fonte confiável. O arquivo está no repositório, com nome BR_Municipios_2025.csv.
+Para extrair a localização de cada município do Brasil, acessamos a base de dados do IBGE disponível em [IBGE](https://www.ibge.gov.br/geociencias/organizacao-do-territorio/malhas-territoriais/15774-malhas.html). O ideal era que viesse um .csv com os nomes e as coordenadas, mas ela vem em um arquivo .zip que extraímos e inserimos os arquivos no site [mapshaper](https://mapshaper.org). Daí pelo console do site rodamos o comando `-each "LATITUDE=this.y, LONGITUDE=this.x", depois na opção Export selecionamos CSV. Assim, conseguimos um arquivo .csv com os nomes e as coordenadas de cada município do Brasil de uma fonte confiável. O arquivo está no repositório, com nome BR_Municipios_2025.csv.
+
+Porém, notamos que nessa base de dados as coordenadas não estavam exatamente no centro urbano, mas sim na região do município. Para uma melhor estimativa, buscamos outra base de dados, disponível no GitHub [municipios-brasileiros](https://github.com/kelvins/municipios-brasileiros). Esta se mostrou bem precisa em relação as coordenadas dos centros urbanos e também confiável, condizente com os dados do IBGE.
 
 ## Motivação e Aplicação Prática
 
@@ -53,12 +55,10 @@ Porém, ao pesquisar isso vimos que, no algoritmo de par de pontos mais próximo
 *Linguagem*: C++<br>
 
 ## Clone o repositório  
- ```sh 
-    git clone git@github.com:projeto-de-algoritmos-2026/G33_Dividir-e-Conquistar_PA-26.1.git
-    cd G33_Grafos_PA-26.1
-
-    cd G33_Dividir-e-Conquistar_PA-26.1
- ```
+```sh 
+git clone git@github.com:projeto-de-algoritmos-2026/G33_Dividir-e-Conquistar_PA-26.1.git
+cd G33_Dividir-e-Conquistar_PA-26.1
+```
 
 ### Pre-requisitos
 - Ter o C++20 instalado.
@@ -66,3 +66,8 @@ Porém, ao pesquisar isso vimos que, no algoritmo de par de pontos mais próximo
 ## Uso
 
 Como rodar a aplicação
+
+```sh 
+g++ -O2 main.cpp csv_parser.cpp -o unicidade.out
+./unicidade.out
+```
