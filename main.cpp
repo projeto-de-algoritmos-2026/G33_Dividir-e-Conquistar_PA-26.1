@@ -100,7 +100,7 @@ int main() {
 
     points = spheric_to_cartesian(points);
 
-    for (int k= 0; k < 200; ++k) {
+    for (int k= 0; k < 20; ++k) {
         auto [i, j] = closest_pair(points);
         if (i > j) swap(i, j);
         cout << names[i] << ' ' << names[j] << '\n';
