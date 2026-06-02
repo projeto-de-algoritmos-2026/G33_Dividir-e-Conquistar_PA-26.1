@@ -3,13 +3,13 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-float to_radians(float degree) { return degree * M_PI / 180.0; }
+double to_radians(double degree) { return degree * M_PI / 180.0; }
 
-float dist(pair<float, float> A, pair<float, float> B) {
+double dist(pair<double, double> A, pair<double, double> B) {
     return (A.first - B.first) * (A.first - B.first) + (A.second - B.second) * (A.second - B.second);
 }
 
-pair<int, int> closest_pair(const vector<pair<float, float>>& points) {
+pair<int, int> closest_pair(const vector<pair<double, double>>& points) {
     vector<int> order(points.size());
     iota(order.begin(), order.end(), 0);
     sort(order.begin(), order.end(), [&](int i, int j) {
@@ -29,29 +29,29 @@ pair<int, int> closest_pair(const vector<pair<float, float>>& points) {
     };
 
     pair<int, int> ans = {0, 1};
-    float min_dist = dist(points[ans.first], points[ans.second]);
+    double min_dist = dist(points[ans.first], points[ans.second]);
 
-    auto sort_and_closest_pair = [&](auto& f, int l, int r) -> pair<float, vector<int>> {
+    auto sort_and_closest_pair = [&](auto& f, int l, int r) -> pair<double, vector<int>> {
         if (l == r) return {1e15, {order[l]}};
 
         int m = (l + r) / 2;
 
         auto [d1, A] = f(f, l, m);
         auto [d2, B] = f(f, m + 1, r);
-        float d = min(d1, d2);
+        double d = min(d1, d2);
 
         auto S = merge(A, B);
 
         vector<int> S2;
         for (int i : S) {
-            float dx = (points[i].first - points[order[m]].first);
+            double dx = (points[i].first - points[order[m]].first);
             if (dx * dx <= d) S2.emplace_back(i);
         }
 
         for (int i = 0; i < (int)S2.size(); ++i)
             for (int j = 1; j <= 7; ++j)
                 if (i + j < (int)S2.size()) {
-                    float cand_d = dist(points[S2[i]], points[S2[i + j]]);
+                    double cand_d = dist(points[S2[i]], points[S2[i + j]]);
                     if (cand_d < d) {
                         d = cand_d;
                         if (d < min_dist) {
@@ -69,20 +69,20 @@ pair<int, int> closest_pair(const vector<pair<float, float>>& points) {
     return ans;
 }
 
-vector<pair<float, float>> spheric_to_cartesian(const vector<pair<float, float>>& points) {
-    float mean_lat = 0;
+vector<pair<double, double>> spheric_to_cartesian(const vector<pair<double, double>>& points) {
+    double mean_lat = 0;
     for (auto [lat, lon] : points) mean_lat += lat;
     mean_lat = to_radians(mean_lat / points.size());
 
-    const float R = 6371.0;
-    vector<pair<float, float>> cartesian_points;
+    const double R = 6371.0;
+    vector<pair<double, double>> cartesian_points;
 
     for (auto [lat, lon] : points) {
-        float lat_rad = to_radians(lat);
-        float lon_rad = to_radians(lon);
+        double lat_rad = to_radians(lat);
+        double lon_rad = to_radians(lon);
 
-        float x = R * lon_rad * cos(mean_lat);
-        float y = R * lat_rad;
+        double x = R * lon_rad * cos(mean_lat);
+        double y = R * lat_rad;
 
         cartesian_points.emplace_back(x, y);
     }
@@ -91,9 +91,9 @@ vector<pair<float, float>> spheric_to_cartesian(const vector<pair<float, float>>
 }
 
 int main() {
-    vector<pair<string, pair<float, float>>> cities = csv_parser();
+    vector<pair<string, pair<double, double>>> cities = csv_parser();
     vector<string> names;
-    vector<pair<float, float>> points;
+    vector<pair<double, double>> points;
     for (const auto& [name, point] : cities) {
         names.emplace_back(name);
         points.emplace_back(point);

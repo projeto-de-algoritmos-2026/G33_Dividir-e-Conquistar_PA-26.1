@@ -4,4 +4,4 @@
 #include <utility>
 #include <string>
 
-std::vector<std::pair<std::string, std::pair<float, float>>> csv_parser();
+std::vector<std::pair<std::string, std::pair<double, double>>> csv_parser();
