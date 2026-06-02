@@ -51,6 +51,8 @@ Porém, ao pesquisar isso vimos que, no algoritmo de par de pontos mais próximo
 
 ## Link do Vídeo da Apresentação
 
+[https://youtu.be/GIyszf_GMgI](https://youtu.be/GIyszf_GMgI)
+
 ## Screenshots
 
 ### Execução do programa
