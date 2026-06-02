@@ -43,6 +43,10 @@ Ao executar o algoritmo notamos alguns problemas.
 
 Para descobrir a distância entre duas cidades possuindo a latitude e longitude não é trivial, mas pesquisamos e achamos uma fórmula chamada Fórmula de Haversine, com ela conseguimos a distância entre duas cidades.
 
+<img width="50%" alt="image" src="https://github.com/user-attachments/assets/cdc22d11-ba24-4ec9-8d5e-a563e4bf53f5" />
+
+Fonte: [InfoEscola](https://www.infoescola.com/geografia/latitude-e-longitude/)
+
 Porém, ao pesquisar isso vimos que, no algoritmo de par de pontos mais próximo para cada ponto só precisamos checar os 7 próximos pontos, mas como nossa superfície é o planeta Terra, não é uma superfície Euclidiana, portanto não é garantido que basta checar os 7. Daí pesquisamos para resolver esse problema e decidimos fazer uma projeção equirretangular baseada na latitude média do conjunto de dados, para converter as coordenadas esféricas em um plano Euclidiano em quilômetros.
 
 ## Link do Vídeo da Apresentação
@@ -61,7 +65,7 @@ cd G33_Dividir-e-Conquistar_PA-26.1
 ```
 
 ### Pre-requisitos
-- Ter o C++20 instalado.
+- Ter um compilador de C++ instalado, como o g++.
 
 ## Uso
 
